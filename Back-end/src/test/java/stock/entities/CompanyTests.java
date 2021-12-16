@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 public class CompanyTests {
 	
 	@Test
-	public void CompanyShouldHaveCorrectStructure() {
+	void CompanyShouldHaveCorrectStructure() {
 	
 		Company company = new Company();
 		company.setId(1L);
