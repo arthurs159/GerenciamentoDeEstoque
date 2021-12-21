@@ -52,7 +52,7 @@ public class ProductControllerTests {
 		resultado.andExpect(jsonPath("$.id").value(existingId));
 		resultado.andExpect(jsonPath("$.name").isNotEmpty());
 		resultado.andExpect(jsonPath("$.quantity").isNotEmpty());
-		resultado.andExpect(jsonPath("$.brand").isNotEmpty());
+		resultado.andExpect(jsonPath("$.").isNotEmpty());
 	}
 	
 	@Test
@@ -67,6 +67,10 @@ public class ProductControllerTests {
 						.accept(MediaType.APPLICATION_JSON));
 		
 		resultado.andExpect(status().isCreated());
+		resultado.andExpect(jsonPath("$.id").exists());
+		resultado.andExpect(jsonPath("$.name").exists());
+		resultado.andExpect(jsonPath("$.quantity").exists());	
+		resultado.andExpect(jsonPath("$.brand").exists());	
 					
 	}
 	
