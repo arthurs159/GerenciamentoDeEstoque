@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import stock.entities.Company;
 
-public interface CompanyRepository extends JpaRepository<Company, Long>{
+public interface CompanyRepository extends JpaRepository<Company, Long> {
 
 }
