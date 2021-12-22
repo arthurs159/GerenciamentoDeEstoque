@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import stock.entities.dto.ProductDTO;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ProductControllerTests {
