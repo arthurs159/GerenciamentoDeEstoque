@@ -3,23 +3,22 @@ package stock.entities.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import stock.entities.Product;
+import stock.entities.Company;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDTO {
+public class CompanyDTO {
 
 	private Long id;
 	private String name;
-	private int quantity;
-	private String brand;
+	private String password;
+	private String cnpj;
 	
-	public ProductDTO(Product entity) {
+	public CompanyDTO(Company entity) {
 		id = entity.getId();
 		name = entity.getName();
-		quantity = entity.getQuantity();
-		brand = entity.getBrand();
+		password = entity.getPassword();
+		cnpj = entity.getCnpj();
 	}
-	
 }
