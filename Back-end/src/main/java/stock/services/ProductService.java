@@ -43,6 +43,7 @@ public class ProductService {
 		repository.deleteById(id);
 	}
 	
+	@Transactional
 	public ProductDTO update(Long id, ProductDTO dto) {
 		Product prod = repository.getOne(id);
 		toDto(dto, prod);
