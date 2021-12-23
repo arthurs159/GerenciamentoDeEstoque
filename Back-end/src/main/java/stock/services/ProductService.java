@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import stock.entities.Product;
 import stock.entities.dto.ProductDTO;
+import stock.exceptions.ProductNotFoundException;
 import stock.repositories.ProductRepository;
 
 @Service
@@ -57,4 +58,16 @@ public class ProductService {
 		entity.setQuantity(dto.getQuantity());
 		entity.setBrand(dto.getBrand());
 	}
+	
+	
+	public ProductDTO addProduct(Long id, int quantity) throws ProductNotFoundException {
+		Product addProduct = repository.getOne(id);
+		
+		int quantityToAdd = quantity + addProduct.getQuantity();
+		addProduct.setQuantity(quantityToAdd);
+		
+		Product productAdded = repository.save(addProduct);
+		return new ProductDTO(productAdded);
+	}
+	
 }
