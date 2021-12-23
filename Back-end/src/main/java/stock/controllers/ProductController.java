@@ -1,5 +1,7 @@
 package stock.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +30,13 @@ public class ProductController {
 	@GetMapping(value = "/{name}")
 	ResponseEntity<ProductDTO> findByName(@PathVariable String name) {
 		ProductDTO dto = service.findByName(name);
-		return ResponseEntity.ok().body(dto);	
-		}
-
+		return ResponseEntity.ok().body(dto);
 	}
+	
+	@GetMapping(value = "/brand/{brand}")
+	ResponseEntity<List<ProductDTO>> findByBrand(@PathVariable String brand) {
+		List<ProductDTO> dto = service.findByBrand(brand);
+		return ResponseEntity.ok().body(dto);
+	}
+
+}

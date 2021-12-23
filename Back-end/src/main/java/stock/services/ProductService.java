@@ -1,6 +1,8 @@
 package stock.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,12 @@ public class ProductService {
 		Optional<Product> product = repository.findByName(name);
 		Product entity = product.orElseThrow();
 		return new ProductDTO(entity);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<ProductDTO> findByBrand(String name){
+		List<Product> product = repository.findByBrand(name);
+		return  product.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
 	}
 
 	@Transactional
