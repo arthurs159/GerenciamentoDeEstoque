@@ -37,7 +37,7 @@ public class CompanyControllerTests {
 		Long existingId = 1L;
 		
 		ResultActions resultado = 
-				mockMvc.perform(get("companies/{id}", existingId));
+				mockMvc.perform(get("/companies/{id}", existingId));
 		
 		resultado.andExpect(status().isOk());
 		resultado.andExpect(jsonPath("$.id").value(existingId));

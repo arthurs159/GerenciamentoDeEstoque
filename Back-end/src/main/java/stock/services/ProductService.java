@@ -26,6 +26,13 @@ public class ProductService {
 		Page<Product> page = repository.findAll(pageable);
 		return page.map(x -> new ProductDTO(x));
 	}
+	
+	@Transactional(readOnly = true)
+	public ProductDTO findByName(Long id) {
+		Optional<Product> product = repository.findById(id);
+		Product entity = product.orElseThrow();
+		return new ProductDTO(entity);
+	}
 
 	@Transactional(readOnly = true)
 	public ProductDTO findByName(String name) {

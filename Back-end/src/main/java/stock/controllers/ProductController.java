@@ -30,8 +30,14 @@ public class ProductController {
 		Page<ProductDTO> dto = service.listAll(pageable);
 		return ResponseEntity.ok().body(dto);
 	}
+	
+	@GetMapping(value = "/{id}")
+	ResponseEntity<ProductDTO> findByName(@PathVariable Long id) {
+		ProductDTO dto = service.findByName(id);
+		return ResponseEntity.ok().body(dto);
+	}
 
-	@GetMapping(value = "/{name}")
+	@GetMapping(value = "/name/{name}")
 	ResponseEntity<ProductDTO> findByName(@PathVariable String name) {
 		ProductDTO dto = service.findByName(name);
 		return ResponseEntity.ok().body(dto);

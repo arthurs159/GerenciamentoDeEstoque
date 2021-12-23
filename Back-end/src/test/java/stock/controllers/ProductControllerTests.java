@@ -43,18 +43,18 @@ public class ProductControllerTests {
 	}
 	
 	@Test
-	public void findByIdShouldReturnTheCompanyWithThisId() throws Exception {
+	public void findByIdShouldReturnTheProductWithThisId() throws Exception {
 		
 		Long existingId = 1L;
 		
 		ResultActions resultado = 
-				mockMvc.perform(get("companies/{id}", existingId));
+				mockMvc.perform(get("/products/{id}", existingId));
 		
 		resultado.andExpect(status().isOk());
 		resultado.andExpect(jsonPath("$.id").value(existingId));
 		resultado.andExpect(jsonPath("$.name").isNotEmpty());
 		resultado.andExpect(jsonPath("$.quantity").isNotEmpty());
-		resultado.andExpect(jsonPath("$.").isNotEmpty());
+		resultado.andExpect(jsonPath("$.brand").isNotEmpty());
 	}
 	
 	@Test
