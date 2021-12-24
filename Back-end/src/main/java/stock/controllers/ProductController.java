@@ -30,7 +30,7 @@ public class ProductController {
 		Page<ProductDTO> dto = service.listAll(pageable);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	ResponseEntity<ProductDTO> findByName(@PathVariable Long id) {
 		ProductDTO dto = service.findByName(id);
@@ -42,18 +42,22 @@ public class ProductController {
 		ProductDTO dto = service.findByName(name);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@GetMapping(value = "/brand/{brand}")
 	ResponseEntity<List<ProductDTO>> findByBrand(@PathVariable String brand) {
 		List<ProductDTO> dto = service.findByBrand(brand);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
-	ResponseEntity<ProductDTO> insert (@RequestBody ProductDTO dto) {
+	ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 
+	ResponseEntity<ProductDTO> delete (@PathVariable Long id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();	
+	}
 }

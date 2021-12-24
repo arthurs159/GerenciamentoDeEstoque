@@ -67,12 +67,6 @@ public class ProductService {
 		return new ProductDTO(prod);
 	}
 
-	private void toDto(ProductDTO dto, Product entity) {
-		entity.setName(dto.getName());
-		entity.setQuantity(dto.getQuantity());
-		entity.setBrand(dto.getBrand());
-	}
-
 	public ProductDTO addProduct(Long id, int quantity) throws ProductNotFoundException {
 		Product addProduct = repository.getOne(id);
 
@@ -94,6 +88,12 @@ public class ProductService {
 			return new ProductDTO(productAdded);
 		}
 		throw new ProductNotFoundException("O Produto não pode ter quantidade negativa");
+	}
+	
+	private void toDto(ProductDTO dto, Product entity) {
+		entity.setName(dto.getName());
+		entity.setQuantity(dto.getQuantity());
+		entity.setBrand(dto.getBrand());
 	}
 
 }
