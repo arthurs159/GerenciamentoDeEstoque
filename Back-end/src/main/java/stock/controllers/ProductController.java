@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import stock.entities.dto.ProductDTO;
+import stock.exceptions.ProductNotFoundException;
 import stock.services.ProductService;
 
 @RestController
@@ -69,4 +70,11 @@ public class ProductController {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<ProductDTO> addProduct (@PathVariable Long id, int quantity, ProductDTO dto) throws ProductNotFoundException{
+		dto = service.addProduct(id, quantity);
+		return ResponseEntity.ok().body(dto);
+	}
+	
 }
