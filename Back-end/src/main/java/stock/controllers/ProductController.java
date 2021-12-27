@@ -76,7 +76,11 @@ public class ProductController {
 	@PatchMapping(value = "/{id}/add")
 	public ProductDTO addProduct (@PathVariable Long id, @RequestBody QuantityDTO quantityDTO) throws ProductNotFoundException{
 		return service.addProduct(id, quantityDTO.getQuantity());
-		
+	}
+	
+	@PatchMapping(value = "/{id}/remove")
+	public ProductDTO removeProduct (@PathVariable Long id, @RequestBody QuantityDTO quantityDTO) throws ProductNotFoundException{
+		return service.removeProduct(id, quantityDTO.getQuantity());
 	}
 	
 }

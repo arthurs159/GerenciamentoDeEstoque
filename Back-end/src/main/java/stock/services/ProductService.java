@@ -67,9 +67,7 @@ public class ProductService {
 		return new ProductDTO(prod);
 	}
 
-	private Product verifyIfExists(Long id) throws ProductNotFoundException {
-		return repository.findById(id).orElseThrow(() -> new ProductNotFoundException("Id não encontrado"));
-	}
+
 
 	public ProductDTO addProduct(Long id, int quantityToIncrement) throws ProductNotFoundException {
 		Product productToIncrement = verifyIfExists(id);
@@ -78,14 +76,14 @@ public class ProductService {
 		return new ProductDTO(productAdded);
 	}
 
-	public ProductDTO RemoveProduct(Long id, int quantity) throws ProductNotFoundException {
-		Product removeProduct = repository.getOne(id);
+	public ProductDTO removeProduct(Long id, int quantity) throws ProductNotFoundException {
+		Product productToRemove = verifyIfExists(id);
 
-		int quantityToRemove = quantity - removeProduct.getQuantity();
+		int quantityToRemove = productToRemove.getQuantity() - quantity;
 
 		if (quantityToRemove > 0) {
-			removeProduct.setQuantity(quantityToRemove);
-			Product productAdded = repository.save(removeProduct);
+			productToRemove.setQuantity(quantityToRemove);
+			Product productAdded = repository.save(productToRemove);
 			return new ProductDTO(productAdded);
 		}
 		throw new ProductNotFoundException("O Produto não pode ter quantidade negativa");
@@ -95,5 +93,9 @@ public class ProductService {
 		entity.setName(dto.getName());
 		entity.setQuantity(dto.getQuantity());
 		entity.setBrand(dto.getBrand());
+	}
+	
+	private Product verifyIfExists(Long id) throws ProductNotFoundException {
+		return repository.findById(id).orElseThrow(() -> new ProductNotFoundException("Id não encontrado"));
 	}
 }
