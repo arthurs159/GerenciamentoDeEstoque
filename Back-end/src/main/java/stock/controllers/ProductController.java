@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import stock.entities.dto.ProductDTO;
+import stock.entities.dto.QuantityDTO;
 import stock.exceptions.ProductNotFoundException;
 import stock.services.ProductService;
 
@@ -71,10 +73,10 @@ public class ProductController {
 		return ResponseEntity.ok().body(dto);
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProductDTO> addProduct (@PathVariable Long id, int quantity, ProductDTO dto) throws ProductNotFoundException{
-		dto = service.addProduct(id, quantity);
-		return ResponseEntity.ok().body(dto);
+	@PatchMapping(value = "/{id}/add")
+	public ProductDTO addProduct (@PathVariable Long id, @RequestBody QuantityDTO quantityDTO) throws ProductNotFoundException{
+		return service.addProduct(id, quantityDTO.getQuantity());
+		
 	}
 	
 }
