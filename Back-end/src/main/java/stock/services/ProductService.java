@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import stock.entities.Product;
 import stock.entities.dto.ProductDTO;
@@ -29,7 +31,7 @@ public class ProductService {
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
 		Optional<Product> product = repository.findById(id);
-		Product entity = product.orElseThrow();
+		Product entity = product.orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 		return new ProductDTO(entity);
 	}
 

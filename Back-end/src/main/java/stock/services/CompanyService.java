@@ -5,8 +5,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import stock.entities.Company;
 import stock.entities.dto.CompanyDTO;
@@ -26,7 +28,8 @@ public class CompanyService {
 	@Transactional(readOnly = true)
 	public CompanyDTO findById(Long id) {
 		Optional<Company> company = repository.findById(id);
-		Company entity = company.orElseThrow();
+		
+		Company entity = company.orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Empresa não encontrada!!"));
 		return new CompanyDTO(entity);
 	}
 }

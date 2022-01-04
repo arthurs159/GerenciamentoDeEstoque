@@ -76,7 +76,7 @@ public class ProductControllerTests {
 	}
 	
 	@Test
-	public void findByIdShouldReturnNotFoundWhenCompanyDoesNotExists() throws Exception {
+	public void findByIdShouldReturnNotFoundWhenProductDoesNotExists() throws Exception {
 		
 		Long nonExistingId = 15L;
 		
