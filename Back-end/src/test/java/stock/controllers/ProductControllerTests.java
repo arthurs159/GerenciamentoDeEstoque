@@ -36,9 +36,8 @@ public class ProductControllerTests {
 						.contentType(MediaType.APPLICATION_JSON));
 		
 		resultado.andExpect(status().isOk());
-		resultado.andExpect(jsonPath("$[0].name").value("Barra de chocolate"));
-		resultado.andExpect(jsonPath("$[1].name").value("Queijo coalho"));
-		resultado.andExpect(jsonPath("$[2].name").value("Geleia de morango"));
+		resultado.andExpect(jsonPath("$[0].name").value("Agua mineral"));
+		resultado.andExpect(jsonPath("$[1].name").value("Amaciante"));
 		
 	}
 	
@@ -79,7 +78,7 @@ public class ProductControllerTests {
 	@Test
 	public void findByIdShouldReturnNotFoundWhenCompanyDoesNotExists() throws Exception {
 		
-		Long nonExistingId = 10L;
+		Long nonExistingId = 15L;
 		
 		ResultActions resultado =
 				mockMvc.perform(get("/products/{id}", nonExistingId));

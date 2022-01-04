@@ -5,8 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,13 +21,13 @@ public class ProductService {
 	private ProductRepository repository;
 
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> listAll(Pageable pageable) {
-		Page<Product> page = repository.findAll(pageable);
-		return page.map(x -> new ProductDTO(x));
+	public List<ProductDTO> listAll() {
+		List<Product> page = repository.findAll(Sort.by("name"));
+		return page.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
 	}
-
+	
 	@Transactional(readOnly = true)
-	public ProductDTO findByName(Long id) {
+	public ProductDTO findById(Long id) {
 		Optional<Product> product = repository.findById(id);
 		Product entity = product.orElseThrow();
 		return new ProductDTO(entity);

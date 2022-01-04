@@ -27,24 +27,8 @@ public class CompanyControllerTests {
 						.contentType(MediaType.APPLICATION_JSON));
 		
 		resultado.andExpect(status().isOk());
-		resultado.andExpect(jsonPath("$[0].name").value("Mercado Ponto Certo"));
+		resultado.andExpect(jsonPath("$[0].name").value("Supermercado Do Bom"));
 		
 	}
 	
-	@Test
-	public void findByIdShouldReturnTheCompanyWithThisId() throws Exception {
-		
-		Long existingId = 1L;
-		
-		ResultActions resultado = 
-				mockMvc.perform(get("/companies/{id}", existingId));
-		
-		resultado.andExpect(status().isOk());
-		resultado.andExpect(jsonPath("$.id").value(existingId));
-		resultado.andExpect(jsonPath("$.name").isNotEmpty());
-		resultado.andExpect(jsonPath("$.password").isNotEmpty());
-		resultado.andExpect(jsonPath("$.cnpj").isNotEmpty());
-	}
-	
-
 }
