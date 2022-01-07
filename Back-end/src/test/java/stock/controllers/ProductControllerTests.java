@@ -38,7 +38,6 @@ public class ProductControllerTests {
 		resultado.andExpect(status().isOk());
 		resultado.andExpect(jsonPath("$[0].name").value("Agua mineral"));
 		resultado.andExpect(jsonPath("$[1].name").value("Amaciante"));
-		
 	}
 	
 	@Test

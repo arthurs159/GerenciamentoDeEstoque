@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ApiGerenciamentoDeEstoque</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>ControleEstoque</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GerenciamentoDeEstoque</name>
 	<description>Projeto de uma API REST para controle de estoque</description>
